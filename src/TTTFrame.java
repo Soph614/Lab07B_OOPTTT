@@ -24,7 +24,7 @@ public class TTTFrame extends JFrame {
         mainPnl = new JPanel();
         mainPnl.setLayout(new GridLayout(2, 1));
 
-        initializeButtonsAndMakeActionable();
+        makeButtonsActionable();
         mainPnl.add(boardPnl);
 
         createQuitBtnPnl();
@@ -61,7 +61,7 @@ public class TTTFrame extends JFrame {
         quitBtnPnl.add(quitBtn);
     }
 
-    public void initializeButtonsAndMakeActionable() {
+    public void makeButtonsActionable() {
         boardPnl = new JPanel();
         boardPnl.setLayout(new GridLayout(3, 3));
         int row;
