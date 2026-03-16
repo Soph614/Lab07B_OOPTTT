@@ -3,8 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class TTTFrame extends JFrame {
-    private final int ROWS = 3;
-    private final int COLS = 3;
     TTTResultDeterminer resultDeterminer = new TTTResultDeterminer();
 
     JPanel mainPnl;
@@ -26,7 +24,7 @@ public class TTTFrame extends JFrame {
         mainPnl = new JPanel();
         mainPnl.setLayout(new GridLayout(2, 1));
 
-        displayBoard();
+        initializeButtonsAndMakeActionable();
         mainPnl.add(boardPnl);
 
         createQuitBtnPnl();
@@ -53,14 +51,6 @@ public class TTTFrame extends JFrame {
     }
 
     // METHODS...
-    public void clearBoard() {
-        for(int row = 0; row < ROWS; row++) {
-            for(int col = 0; col < COLS; col++) {
-                TTTGameBoard.boardButtons[row][col].setText(" ");
-            }
-        }
-    }
-
     public void createQuitBtnPnl() {
         quitBtnPnl = new JPanel();
 
@@ -71,71 +61,39 @@ public class TTTFrame extends JFrame {
         quitBtnPnl.add(quitBtn);
     }
 
-    public void displayBoard() {
-        initializeButtonsAndMakeActionable();
-    }
-
     public void initializeButtonsAndMakeActionable() {
         boardPnl = new JPanel();
         boardPnl.setLayout(new GridLayout(3, 3));
         int row;
         int col;
-        for (row = 0; row < ROWS; row++) {
-            for (col = 0; col < TTTGameBoard.boardButtons[row].length; col++) {
-                TTTGameBoard.boardButtons[row][col] = new TTTTileButton(row, col);
-                TTTGameBoard.boardButtons[row][col].setText(" ");
-                TTTGameBoard.boardButtons[row][col].setSize(2, 3);
-                TTTGameBoard.boardButtons[row][col].addActionListener((ActionEvent actionEvent) -> {
-                    TTTGameBoard.move++;
+        for (row = 0; row < TTTGameBoardVariables.ROWS; row++) {
+            for (col = 0; col < TTTGameBoardVariables.boardButtons[row].length; col++) {
+                TTTGameBoardVariables.boardButtons[row][col] = new TTTTileButton(row, col);
+                TTTGameBoardVariables.boardButtons[row][col].setText(" ");
+                TTTGameBoardVariables.boardButtons[row][col].setSize(2, 3);
+                TTTGameBoardVariables.boardButtons[row][col].addActionListener((ActionEvent actionEvent) -> {
+                    TTTGameBoardVariables.move++;
                     int rowIndex;
                     int colIndex;
-                    for (rowIndex = 0; rowIndex < TTTGameBoard.boardButtons.length; rowIndex++) {
-                        for (colIndex = 0; colIndex < TTTGameBoard.boardButtons.length; colIndex++) {
-                            if(actionEvent.getSource() == TTTGameBoard.boardButtons[rowIndex][colIndex]) {
-                                TTTGameBoard.rowMoveWasIn = rowIndex;
-                                TTTGameBoard.colMoveWasIn = colIndex;
+                    for (rowIndex = 0; rowIndex < TTTGameBoardVariables.boardButtons.length; rowIndex++) {
+                        for (colIndex = 0; colIndex < TTTGameBoardVariables.boardButtons.length; colIndex++) {
+                            if(actionEvent.getSource() == TTTGameBoardVariables.boardButtons[rowIndex][colIndex]) {
+                                TTTGameBoardVariables.rowMoveWasIn = rowIndex;
+                                TTTGameBoardVariables.colMoveWasIn = colIndex;
                                 resultDeterminer.determineAndDisplayWhetherPlayerWasXorO();
                                 boolean isWin = resultDeterminer.isWin();
                                 boolean isTie = resultDeterminer.isTie();
-                                if (TTTGameBoard.move >= 5 && isWin) {
-                                    JOptionPane.showMessageDialog(null,TTTGameBoard.player + " wins!");
-                                    Object[] yesOrNoOptions = {"Yes", "No"};
-                                    int answerIndex = JOptionPane.showOptionDialog(null, "Would you like\nto play again?", "Play Again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, yesOrNoOptions, yesOrNoOptions[1]);
-                                    if (answerIndex == 0) {
-                                        for (int i = 0; i < ROWS; i++) {
-                                            for (int j = 0; j < TTTGameBoard.boardButtons[i].length; j++) {
-                                                TTTGameBoard.boardButtons[i][j].setText(" ");
-                                                TTTGameBoard.boardButtons[i][j].setEnabled(true);
-                                                TTTGameBoard.move = 0;
-                                            }
-                                        }
-                                    }
-                                    if (answerIndex == 1) {
-                                        System.exit(0);
-                                    }
+                                if (TTTGameBoardVariables.move >= 5 && isWin) {
+                                    TTTResultDeterminer.whatHappensIfSomeoneWins();
                                 }
-                                if (TTTGameBoard.move >= 7 && isTie) {
-                                    JOptionPane.showMessageDialog(null,"It's a tie!");
-                                    Object[] yesOrNoOptions = {"Yes", "No"};
-                                    int optionsInt = JOptionPane.showOptionDialog(null, "Would you like\nto play again?", "Play Again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, yesOrNoOptions, yesOrNoOptions[1]);
-                                    if (optionsInt == 0) {
-                                        for (int i = 0; i < ROWS; i++) {
-                                            for (int j = 0; j < TTTGameBoard.boardButtons[i].length; j++) {
-                                                TTTGameBoard.boardButtons[i][j].setText(" ");
-                                                TTTGameBoard.boardButtons[i][j].setEnabled(true);
-                                                TTTGameBoard.move = 0;
-                                            }
-                                        }
-                                    }
-                                    if (optionsInt == 1) {
-                                        System.exit(0);
-                                    }
+                                if (TTTGameBoardVariables.move >= 7 && isTie) {
+                                    TTTResultDeterminer.whatHappensIfThereIsATie();
                                 }
                             }
                         }
                     }
                 });
-                boardPnl.add(TTTGameBoard.boardButtons[row][col]);
+                boardPnl.add(TTTGameBoardVariables.boardButtons[row][col]);
             }
         }
     }

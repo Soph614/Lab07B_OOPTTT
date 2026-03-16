@@ -1,6 +1,6 @@
+import javax.swing.*;
+
 public class TTTResultDeterminer {
-    private final int ROWS = 3;
-    private final int COLS = 3;
 
 
     // INITIATING VARIABLES
@@ -8,17 +8,17 @@ public class TTTResultDeterminer {
     boolean oFlag = false;
 
     public void determineAndDisplayWhetherPlayerWasXorO() {
-        if(TTTGameBoard.move == 1 | TTTGameBoard.move == 3 | TTTGameBoard.move == 5 | TTTGameBoard.move == 7 | TTTGameBoard.move == 9)
+        if(TTTGameBoardVariables.move == 1 | TTTGameBoardVariables.move == 3 | TTTGameBoardVariables.move == 5 | TTTGameBoardVariables.move == 7 | TTTGameBoardVariables.move == 9)
         {
-            TTTGameBoard.boardButtons[TTTGameBoard.rowMoveWasIn][TTTGameBoard.colMoveWasIn].setText("X");
-            TTTGameBoard.boardButtons[TTTGameBoard.rowMoveWasIn][TTTGameBoard.colMoveWasIn].setEnabled(false);
-            TTTGameBoard.player = "X";
+            TTTGameBoardVariables.boardButtons[TTTGameBoardVariables.rowMoveWasIn][TTTGameBoardVariables.colMoveWasIn].setText("X");
+            TTTGameBoardVariables.boardButtons[TTTGameBoardVariables.rowMoveWasIn][TTTGameBoardVariables.colMoveWasIn].setEnabled(false);
+            TTTGameBoardVariables.player = "X";
 
         }
-        if(TTTGameBoard.move == 2 | TTTGameBoard.move == 4 | TTTGameBoard.move == 6 | TTTGameBoard.move == 8) {
-            TTTGameBoard.boardButtons[TTTGameBoard.rowMoveWasIn][TTTGameBoard.colMoveWasIn].setText("O");
-            TTTGameBoard.boardButtons[TTTGameBoard.rowMoveWasIn][TTTGameBoard.colMoveWasIn].setEnabled(false);
-            TTTGameBoard.player = "O";
+        if(TTTGameBoardVariables.move == 2 | TTTGameBoardVariables.move == 4 | TTTGameBoardVariables.move == 6 | TTTGameBoardVariables.move == 8) {
+            TTTGameBoardVariables.boardButtons[TTTGameBoardVariables.rowMoveWasIn][TTTGameBoardVariables.colMoveWasIn].setText("O");
+            TTTGameBoardVariables.boardButtons[TTTGameBoardVariables.rowMoveWasIn][TTTGameBoardVariables.colMoveWasIn].setEnabled(false);
+            TTTGameBoardVariables.player = "O";
         }
     }
 
@@ -26,8 +26,8 @@ public class TTTResultDeterminer {
         return isColWin() || isRowWin() || isDiagonalWin();
     }
     public boolean isRowWin() {
-        for(int row = 0; row < ROWS; row++) {
-            if(TTTGameBoard.boardButtons[row][0].getText().equals(TTTGameBoard.player) && TTTGameBoard.boardButtons[row][1].getText().equals(TTTGameBoard.player) && TTTGameBoard.boardButtons[row][2].getText().equals(TTTGameBoard.player)) {
+        for(int row = 0; row < TTTGameBoardVariables.ROWS; row++) {
+            if(TTTGameBoardVariables.boardButtons[row][0].getText().equals(TTTGameBoardVariables.player) && TTTGameBoardVariables.boardButtons[row][1].getText().equals(TTTGameBoardVariables.player) && TTTGameBoardVariables.boardButtons[row][2].getText().equals(TTTGameBoardVariables.player)) {
                 return true;
             }
         }
@@ -35,8 +35,8 @@ public class TTTResultDeterminer {
     }
 
     public boolean isColWin() {
-        for(int col = 0; col < ROWS; col++) {
-            if(TTTGameBoard.boardButtons[0][col].getText().equals(TTTGameBoard.player) && TTTGameBoard.boardButtons[1][col].getText().equals(TTTGameBoard.player) && TTTGameBoard.boardButtons[2][col].getText().equals(TTTGameBoard.player)) {
+        for(int col = 0; col < TTTGameBoardVariables.ROWS; col++) {
+            if(TTTGameBoardVariables.boardButtons[0][col].getText().equals(TTTGameBoardVariables.player) && TTTGameBoardVariables.boardButtons[1][col].getText().equals(TTTGameBoardVariables.player) && TTTGameBoardVariables.boardButtons[2][col].getText().equals(TTTGameBoardVariables.player)) {
                 return true;
             }
         }
@@ -44,11 +44,11 @@ public class TTTResultDeterminer {
     }
 
     public boolean isDiagonalWin() {
-        for(int row = 0; row < ROWS; row++) {
-            if(TTTGameBoard.boardButtons[0][0].getText().equals(TTTGameBoard.player) && TTTGameBoard.boardButtons[1][1].getText().equals(TTTGameBoard.player) && TTTGameBoard.boardButtons[2][2].getText().equals(TTTGameBoard.player)) {
+        for(int row = 0; row < TTTGameBoardVariables.ROWS; row++) {
+            if(TTTGameBoardVariables.boardButtons[0][0].getText().equals(TTTGameBoardVariables.player) && TTTGameBoardVariables.boardButtons[1][1].getText().equals(TTTGameBoardVariables.player) && TTTGameBoardVariables.boardButtons[2][2].getText().equals(TTTGameBoardVariables.player)) {
                 return true;
             }
-            if(TTTGameBoard.boardButtons[2][0].getText().equals(TTTGameBoard.player) && TTTGameBoard.boardButtons[1][1].getText().equals(TTTGameBoard.player) && TTTGameBoard.boardButtons[0][2].getText().equals(TTTGameBoard.player)) {
+            if(TTTGameBoardVariables.boardButtons[2][0].getText().equals(TTTGameBoardVariables.player) && TTTGameBoardVariables.boardButtons[1][1].getText().equals(TTTGameBoardVariables.player) && TTTGameBoardVariables.boardButtons[0][2].getText().equals(TTTGameBoardVariables.player)) {
                 return true;
             }
         }
@@ -60,17 +60,17 @@ public class TTTResultDeterminer {
 // Check all 8 win vectors for an X and O so
 // no win is possible
 // Check for row ties
-        for(int row=0; row < ROWS; row++)
+        for(int row = 0; row < TTTGameBoardVariables.ROWS; row++)
         {
-            if(TTTGameBoard.boardButtons[row][0].getText().equals("X") ||
-                    TTTGameBoard.boardButtons[row][1].getText().equals("X") ||
-                    TTTGameBoard.boardButtons[row][2].getText().equals("X"))
+            if(TTTGameBoardVariables.boardButtons[row][0].getText().equals("X") ||
+                    TTTGameBoardVariables.boardButtons[row][1].getText().equals("X") ||
+                    TTTGameBoardVariables.boardButtons[row][2].getText().equals("X"))
             {
                 xFlag = true; // there is an X in this row
             }
-            if(TTTGameBoard.boardButtons[row][0].getText().equals("O") ||
-                    TTTGameBoard.boardButtons[row][1].getText().equals("O") ||
-                    TTTGameBoard.boardButtons[row][2].getText().equals("O"))
+            if(TTTGameBoardVariables.boardButtons[row][0].getText().equals("O") ||
+                    TTTGameBoardVariables.boardButtons[row][1].getText().equals("O") ||
+                    TTTGameBoardVariables.boardButtons[row][2].getText().equals("O"))
             {
                 oFlag = true; // there is an O in this row
             }
@@ -81,17 +81,17 @@ public class TTTResultDeterminer {
             xFlag = oFlag = false;
         }
 // Now scan the columns
-        for(int col=0; col < COLS; col++)
+        for(int col = 0; col < TTTGameBoardVariables.COLS; col++)
         {
-            if(TTTGameBoard.boardButtons[0][col].getText().equals("X") ||
-                    TTTGameBoard.boardButtons[1][col].getText().equals("X") ||
-                    TTTGameBoard.boardButtons[2][col].getText().equals("X"))
+            if(TTTGameBoardVariables.boardButtons[0][col].getText().equals("X") ||
+                    TTTGameBoardVariables.boardButtons[1][col].getText().equals("X") ||
+                    TTTGameBoardVariables.boardButtons[2][col].getText().equals("X"))
             {
                 xFlag = true; // there is an X in this col
             }
-            if(TTTGameBoard.boardButtons[0][col].getText().equals("O") ||
-                    TTTGameBoard.boardButtons[1][col].getText().equals("O") ||
-                    TTTGameBoard.boardButtons[2][col].getText().equals("O"))
+            if(TTTGameBoardVariables.boardButtons[0][col].getText().equals("O") ||
+                    TTTGameBoardVariables.boardButtons[1][col].getText().equals("O") ||
+                    TTTGameBoardVariables.boardButtons[2][col].getText().equals("O"))
             {
                 oFlag = true; // there is an O in this col
             }
@@ -102,15 +102,15 @@ public class TTTResultDeterminer {
         }
 // Now check for the diagonals
         xFlag = oFlag = false;
-        if(TTTGameBoard.boardButtons[0][0].getText().equals("X") ||
-                TTTGameBoard.boardButtons[1][1].getText().equals("X") ||
-                TTTGameBoard.boardButtons[2][2].getText().equals("X") )
+        if(TTTGameBoardVariables.boardButtons[0][0].getText().equals("X") ||
+                TTTGameBoardVariables.boardButtons[1][1].getText().equals("X") ||
+                TTTGameBoardVariables.boardButtons[2][2].getText().equals("X") )
         {
             xFlag = true;
         }
-        if(TTTGameBoard.boardButtons[0][0].getText().equals("O") ||
-                TTTGameBoard.boardButtons[1][1].getText().equals("O") ||
-                TTTGameBoard.boardButtons[2][2].getText().equals("O") )
+        if(TTTGameBoardVariables.boardButtons[0][0].getText().equals("O") ||
+                TTTGameBoardVariables.boardButtons[1][1].getText().equals("O") ||
+                TTTGameBoardVariables.boardButtons[2][2].getText().equals("O") )
         {
             oFlag = true;
         }
@@ -119,15 +119,15 @@ public class TTTResultDeterminer {
             return false; // No tie can still have a diag win
         }
         xFlag = oFlag = false;
-        if(TTTGameBoard.boardButtons[0][2].getText().equals("X") ||
-                TTTGameBoard.boardButtons[1][1].getText().equals("X") ||
-                TTTGameBoard.boardButtons[2][0].getText().equals("X") )
+        if(TTTGameBoardVariables.boardButtons[0][2].getText().equals("X") ||
+                TTTGameBoardVariables.boardButtons[1][1].getText().equals("X") ||
+                TTTGameBoardVariables.boardButtons[2][0].getText().equals("X") )
         {
             xFlag = true;
         }
-        if(TTTGameBoard.boardButtons[0][2].getText().equals("O") ||
-                TTTGameBoard.boardButtons[1][1].getText().equals("O") ||
-                TTTGameBoard.boardButtons[2][0].getText().equals("O") )
+        if(TTTGameBoardVariables.boardButtons[0][2].getText().equals("O") ||
+                TTTGameBoardVariables.boardButtons[1][1].getText().equals("O") ||
+                TTTGameBoardVariables.boardButtons[2][0].getText().equals("O") )
         {
             oFlag = true;
         }
@@ -137,5 +137,42 @@ public class TTTResultDeterminer {
         }
 // Checked every vector so I know I have a tie
         return true;
+    }
+
+    public static void whatHappensIfSomeoneWins() {
+        JOptionPane.showMessageDialog(null, TTTGameBoardVariables.player + " wins!");
+        Object[] yesOrNoOptions = {"Yes", "No"};
+        int answerIndex = JOptionPane.showOptionDialog(null, "Would you like\nto play again?", "Play Again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, yesOrNoOptions, yesOrNoOptions[1]);
+        if (answerIndex == 0) {
+            for (int i = 0; i < TTTGameBoardVariables.ROWS; i++) {
+                for (int j = 0; j < TTTGameBoardVariables.boardButtons[i].length; j++) {
+                    TTTGameBoardVariables.boardButtons[i][j].setText(" ");
+                    TTTGameBoardVariables.boardButtons[i][j].setEnabled(true);
+                    TTTGameBoardVariables.move = 0;
+                }
+            }
+        }
+        if (answerIndex == 1) {
+            System.exit(0);
+        }
+    }
+
+    public static void whatHappensIfThereIsATie() {
+        JOptionPane.showMessageDialog(null,"It's a tie!");
+        Object[] yesOrNoOptions = {"Yes", "No"};
+        int optionsInt = JOptionPane.showOptionDialog(null, "Would you like\nto play again?", "Play Again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, yesOrNoOptions, yesOrNoOptions[1]);
+        if (optionsInt == 0) {
+            for (int i = 0; i < TTTGameBoardVariables.ROWS; i++) {
+                for (int j = 0; j < TTTGameBoardVariables.boardButtons[i].length; j++) {
+                    TTTGameBoardVariables.boardButtons[i][j].setText(" ");
+                    TTTGameBoardVariables.boardButtons[i][j].setEnabled(true);
+                    TTTGameBoardVariables.move = 0;
+                }
+            }
+        }
+
+        if (optionsInt == 1) {
+            System.exit(0);
+        }
     }
 }
