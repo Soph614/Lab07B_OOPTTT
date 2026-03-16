@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class TicTacToeFrame extends JFrame {
+public class TTTFrame extends JFrame {
     private final int ROWS = 3;
     private final int COLS = 3;
     TTTResultDeterminer resultDeterminer = new TTTResultDeterminer();
@@ -17,12 +17,12 @@ public class TicTacToeFrame extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JFrame frame = new TicTacToeFrame();
+                JFrame frame = new TTTFrame();
             }
         });
     }
 
-    public TicTacToeFrame() {
+    public TTTFrame() {
         mainPnl = new JPanel();
         mainPnl.setLayout(new GridLayout(2, 1));
 
