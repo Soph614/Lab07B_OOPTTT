@@ -1,4 +1,4 @@
-public class TTTGameBoardVariables {
+public class TTTStaticVariables {
     public static TTTTileButton[][] boardButtons = new TTTTileButton[3][3];
 
     // INITIATING VARIABLES

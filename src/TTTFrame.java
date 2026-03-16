@@ -66,34 +66,34 @@ public class TTTFrame extends JFrame {
         boardPnl.setLayout(new GridLayout(3, 3));
         int row;
         int col;
-        for (row = 0; row < TTTGameBoardVariables.ROWS; row++) {
-            for (col = 0; col < TTTGameBoardVariables.boardButtons[row].length; col++) {
-                TTTGameBoardVariables.boardButtons[row][col] = new TTTTileButton(row, col);
-                TTTGameBoardVariables.boardButtons[row][col].setText(" ");
-                TTTGameBoardVariables.boardButtons[row][col].setSize(2, 3);
-                TTTGameBoardVariables.boardButtons[row][col].addActionListener((ActionEvent actionEvent) -> {
-                    TTTGameBoardVariables.move++;
+        for (row = 0; row < TTTStaticVariables.ROWS; row++) {
+            for (col = 0; col < TTTStaticVariables.boardButtons[row].length; col++) {
+                TTTStaticVariables.boardButtons[row][col] = new TTTTileButton(row, col);
+                TTTStaticVariables.boardButtons[row][col].setText(" ");
+                TTTStaticVariables.boardButtons[row][col].setSize(2, 3);
+                TTTStaticVariables.boardButtons[row][col].addActionListener((ActionEvent actionEvent) -> {
+                    TTTStaticVariables.move++;
                     int rowIndex;
                     int colIndex;
-                    for (rowIndex = 0; rowIndex < TTTGameBoardVariables.boardButtons.length; rowIndex++) {
-                        for (colIndex = 0; colIndex < TTTGameBoardVariables.boardButtons.length; colIndex++) {
-                            if(actionEvent.getSource() == TTTGameBoardVariables.boardButtons[rowIndex][colIndex]) {
-                                TTTGameBoardVariables.rowMoveWasIn = rowIndex;
-                                TTTGameBoardVariables.colMoveWasIn = colIndex;
+                    for (rowIndex = 0; rowIndex < TTTStaticVariables.boardButtons.length; rowIndex++) {
+                        for (colIndex = 0; colIndex < TTTStaticVariables.boardButtons.length; colIndex++) {
+                            if(actionEvent.getSource() == TTTStaticVariables.boardButtons[rowIndex][colIndex]) {
+                                TTTStaticVariables.rowMoveWasIn = rowIndex;
+                                TTTStaticVariables.colMoveWasIn = colIndex;
                                 resultDeterminer.determineAndDisplayWhetherPlayerWasXorO();
                                 boolean isWin = resultDeterminer.isWin();
                                 boolean isTie = resultDeterminer.isTie();
-                                if (TTTGameBoardVariables.move >= 5 && isWin) {
+                                if (TTTStaticVariables.move >= 5 && isWin) {
                                     TTTResultDeterminer.whatHappensIfSomeoneWins();
                                 }
-                                if (TTTGameBoardVariables.move >= 7 && isTie) {
+                                if (TTTStaticVariables.move >= 7 && isTie) {
                                     TTTResultDeterminer.whatHappensIfThereIsATie();
                                 }
                             }
                         }
                     }
                 });
-                boardPnl.add(TTTGameBoardVariables.boardButtons[row][col]);
+                boardPnl.add(TTTStaticVariables.boardButtons[row][col]);
             }
         }
     }
